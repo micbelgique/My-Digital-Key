@@ -1,14 +1,6 @@
 {
   "presets": ["es2015", "meteor", "stage-0"],
   "plugins": [
-    "transform-class-properties",
-    "transform-react-constant-elements",
-    "transform-react-inline-elements",
-    "transform-react-remove-prop-types",
-    ["styled-components", {
-      "ssr": true,
-      "displayName": true,
-      "minify": true
-    }]
+    "transform-class-properties"
   ]
 }
