@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "meteor run --settings settings.dev.json --port 3000",
     "prod": "meteor run --settings settings.prod.json",
-    "lint": "./scripts/eslint.sh; exit 0"
+    "lint": "./scripts/eslint.sh; exit 0",
+    "mobile": "meteor run android-device"
   },
   "dependencies": {
     "actual": "^0.4.0",
