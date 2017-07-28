@@ -36,6 +36,7 @@
     "is-retina": "^1.0.3",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.4",
+    "meteor-apollo-accounts": "^2.0.1",
     "meteor-node-stubs": "~0.2.0",
     "moment": "^2.17.1",
     "mysql": "^2.13.0",

@@ -3,27 +3,33 @@ import Login from '/imports/ui/components/Pages/Login';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Meteor } from 'meteor/meteor';
 import { valueSet } from 'meteor/ssrwpo:ssr';
 import client from '/imports/ApolloClient';
+import { onTokenChange, userId, logout } from 'meteor-apollo-accounts';
 import Dashboard from '/imports/ui/components/Pages/Dashboard';
 import NFC from '/imports/ui/components/Pages/NFC';
 
 class Panel extends Component {
 
   componentWillMount() {
-    if (Meteor.isClient && Meteor.userId()) this.props.setLoggedIn();
+    if (Meteor.isClient) {
+      userId()
+      .then(() => {
+        this.props.setLoggedIn();
+      });
+    }
   }
 
   componentDidMount() {
     const { setLoggedIn, setLoggedOut } = this.props;
-    Tracker.autorun(() => {
-      const userId = Meteor.userId();
-      if (userId) {
+    onTokenChange(() => {
+      userId()
+      .then((data) => {
         setLoggedIn();
-      } else {
+      })
+      .catch(() => {
         setLoggedOut();
-      }
+      });
       client.resetStore();
     });
   }
@@ -38,7 +44,7 @@ class Panel extends Component {
           exact
           path="/disconnect"
           render={() => {
-            Meteor.logout();
+            logout(client);
             return <Redirect to="/" />;
           }}
         />
