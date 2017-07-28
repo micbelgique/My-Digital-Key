@@ -7,10 +7,7 @@ const categories = [
   { name: 'Applications',
     links: [
       { name: 'Dashboard', href: '/' },
-      { name: 'Ajouter un client', href: '/add-client' },
-      { name: 'Prospection', href: '/prospecting' },
-      { name: 'Facturation', href: '/billing' },
-      { name: 'Ajouter un produit', href: '/add-item' },
+      { name: 'NFC', href: '/NFC' },
     ],
   },
   { name: 'Options',

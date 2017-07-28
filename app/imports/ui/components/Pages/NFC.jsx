@@ -5,14 +5,14 @@ import Wrapper from '/imports/ui/components/Atoms/Wrapper';
 import PropTypes from 'prop-types';
 import pick from 'lodash/pick';
 
-const Dashboard = () => (
+const NFC = () => (
   <Main>
     <Wrapper>
-      <H1>Dashboard</H1>
+      <H1>NFC Test</H1>
     </Wrapper>
   </Main>
 );
 
-Dashboard.propTypes = {};
+NFC.propTypes = {};
 
-export default Dashboard;
+export default NFC;

@@ -7,10 +7,7 @@ import { Meteor } from 'meteor/meteor';
 import { valueSet } from 'meteor/ssrwpo:ssr';
 import client from '/imports/ApolloClient';
 import Dashboard from '/imports/ui/components/Pages/Dashboard';
-import Billing from '/imports/ui/components/Pages/Billing';
-import AddClient from '/imports/ui/components/Pages/AddClient';
-import AddItem from '/imports/ui/components/Pages/AddItem';
-import Prospecting from '/imports/ui/components/Pages/Prospecting';
+import NFC from '/imports/ui/components/Pages/NFC';
 
 class Panel extends Component {
 
@@ -36,10 +33,7 @@ class Panel extends Component {
     return (
       <Switch>
         <Route exact path="/" component={Dashboard} />
-        <Route exact path="/add-client" component={AddClient} />
-        <Route exact path="/add-item" component={AddItem} />
-        <Route exact path="/billing" component={Billing} />
-        <Route exact path="/prospecting" component={Prospecting} />
+        <Route exact path="/NFC" component={NFC} />
         <Route
           exact
           path="/disconnect"
