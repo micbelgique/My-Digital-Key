@@ -1,0 +1,59 @@
+parser: babel-eslint
+env:
+  browser: true
+  meteor: true
+  mongo: true
+  jest: true
+globals:
+  window: true
+  document: true
+  FormData: true
+  Image: true
+  fetch: true
+  Assets: true
+parserOptions:
+  ecmaFeatures:
+    classes: true
+    jsx: true
+settings:
+  import/core-modules:
+    - meteor/meteor
+    - meteor/apollo
+    - meteor/webapp
+    - meteor/ejson
+    - meteor/mongo
+    - meteor/check
+    - meteor/tracker
+    - meteor/tmeasday:check-npm-versions
+    - meteor/ssrwpo:ssr
+    - meteor/mdg:validated-method
+    - meteor/didericis:callpromise-mixin
+  import/resolver:
+    meteor:
+      extensions:
+        - .jsx
+        - .js
+  react:
+    version: 15.4.2
+plugins:
+  - meteor
+  - class-property
+extends:
+  - eslint:recommended
+  - 'plugin:react/recommended'
+  - airbnb
+  - 'plugin:meteor/recommended'
+  - 'plugin:import/errors'
+  - 'plugin:import/warnings'
+rules:
+  # Removed or modified too strict rules
+  # Disable PropTypes only for any
+  react/forbid-prop-types: [2, { forbid: ['any'] }]
+  # This rule is deprecated in favor of eslint-plugin-import
+  react/require-extension: 0
+  # Disbled temporarily: A pure render function should be added as a pattern
+  class-methods-use-this: 0
+  # Disabled as it's mandatory for Meteor imports
+  import/no-absolute-path: 0
+  no-underscore-dangle: 0
+  react/no-array-index-key: 0
