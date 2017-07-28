@@ -1,0 +1,166 @@
+// Styling of the head
+
+.dropdown {
+  display: block;
+  position: relative;
+  height: auto;
+  max-height: 40px;
+  width: 80%;
+  font-family: "Source Sans Pro", serif;
+  font-weight: 700;
+  font-size: 14px;
+  text-align: left;
+  margin: 0 auto;
+  transition: .15s;
+  vertical-align: top;
+  &:hover {
+    box-shadow: 0 1px 3px 0 rgba(50, 50, 50, .15);
+  }
+  @include m('o') {
+    max-height: none;
+  }
+}
+
+.dropdown_head{
+  display:block;
+  background: #c9c9c9;
+  color: $blackTheme;
+  border: $color2 solid 2px;
+  font-size: 1.25em;
+  line-height: 40px;
+  font-weight: 500;
+  padding: 0 .5em;
+  border-radius: 1px 3px 3px 1px;
+  text-align: center;
+}
+
+// Styling of the checkboxes (this is general since it is used to make each element clickable)
+
+.dropdown_checkbox{
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 40px;
+  opacity: 0;
+  appearance: none;
+  cursor: pointer;
+}
+
+.dropdown_checkbox:checked + .dropdown_head{
+  border-bottom-right-radius:0;
+  border-bottom-left-radius:0;
+}
+
+.dropdown_checkbox:checked + .dropdown_head .dropdown_arrow {
+  transform: rotate(-180deg);
+}
+
+.dropdown_checkbox:checked ~ .dropdown_elWrapper {
+  transform: scaleY(1);
+  overflow-y: auto;
+}
+
+.dropdown_arrow{
+  box-shadow: 0 0 3px 0 rgba(50, 50, 50, .3);
+  width: 22px;
+  height: 22px;
+  transition: 0.45s ease-in-out;
+  position: absolute;
+  pointer-events: none; // So we can click on the icon because otherwise it blocks the click that should be arriving on the checkbox element since it's on top of it.
+  top: 10px;
+  right: 8px;
+  border-radius: 100%;
+  &:before , &:after{
+    content: " ";
+    position: absolute;
+    background: #ccc;
+    width: 2px;
+    height: 10px;
+    right: 10px;
+    top: 7px;
+    box-shadow: inset 0 0.3px 0.3px 0.3px rgba(50, 50, 50, .3);
+  }
+  &:before{
+    transform: translate( 3px , 0 ) rotate( 45deg );
+  }
+
+  &:after{
+    transform: translate( -3px , 0 ) rotate( -45deg );
+  }
+}
+
+// Styling of the wrapper that contains all elements
+
+.dropdown_elWrapper {
+  display: block;
+  position: absolute;
+  height: auto;
+  width: 100%;
+  overflow: hidden;
+  transition: .45s;
+  box-shadow: 0 0 2px 0 rgba(50,50,50,.3);
+  border-radius: 0 0 5px 5px;
+  transform-origin: top;
+  transform: scaleY(0);
+  z-index: 99;
+  max-height: 150px;
+  background: #c9c9c9;
+}
+
+// Styling of individual elements
+
+.dropdown_el {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  &:after {
+    color: #666;
+    font-size: 1.75em;
+  }
+}
+
+.dropdown_el + .dropdown_label:last-of-type{
+    border-radius: 0 0 3px 3px;
+}
+
+.dropdown_label { // I ain't using this for pagination
+  display: block;
+  font-size: .875em;
+  line-height:32px;
+  font-weight: 700;
+  padding: 4px 8px;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: 0 -3px 2px -2px rgba(50, 50, 50, 0.15);
+  transition: 0.1s;
+  text-align: center;
+  text-decoration: none;
+  color: $blackTheme;
+}
+
+
+//Patches for pagination
+
+.dropdown_label:hover {
+  color: $border;
+}
+
+.dropdown_label:active {
+  background: #c9c9c9;
+}
+
+.dropdown_label-current {
+  background: lighten($blackTheme, 70%);
+  color: $blackTheme;
+  border-left: 8px solid $color2;
+  box-shadow: 0 2px 5px 1px rgba(50, 50, 50, 0.15);
+}
+
+/* End states */
+
+@media only screen and (max-width: 490px) {
+  .dropdown {
+    width: 90%;
+  }
+}

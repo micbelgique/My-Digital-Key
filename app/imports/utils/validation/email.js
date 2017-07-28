@@ -1,0 +1,1 @@
+export const checkEmail = x => !x ? false : String(x).trim().match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i);
