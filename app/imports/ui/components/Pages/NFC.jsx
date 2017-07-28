@@ -8,13 +8,17 @@ class NFC extends Component {
 
   componentDidMount(){
     if (Meteor.isCordova) {
-      cordova.plugins.cordova.addNdefListener(() => {
-        console.log('Read nfc');
-      }, () => {
-        console.log('Added listener');
-      }, () => {
-        console.log('Fail adding listener');
+      Meteor.startup(() => {
+        nfc.addNdefListener(() => {
+          console.log('Read nfc');
+        }, () => {
+          console.log('Added listener');
+        }, () => {
+          console.log('Fail adding listener');
+        });
       });
+
+
     }
   }
 
