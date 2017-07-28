@@ -7,28 +7,27 @@ import StyledForm from '/imports/ui/components/Atoms/LoginForm';
 import LoginText from '/imports/ui/components/Molecules/LoginText';
 import Button from '/imports/ui/components/Atoms/Button';
 import styled from 'styled-components';
-import { Meteor } from 'meteor/meteor';
+import { loginWithPassword } from 'meteor-apollo-accounts';
 import { connect } from 'react-redux';
 import { valueSet } from 'meteor/ssrwpo:ssr';
 import throttle from 'lodash/throttle';
 import PropTypes from 'prop-types';
+import { withApollo } from 'react-apollo';
 
 const SubmitLine = styled(FormLine)`
   margin: 15px 0 0 0;
 `;
 
-const login = async ({ email, password }, animateError) => {
+const login = async ({ email, password }, animateError, client) => {
   try {
-    await Meteor.loginWithPassword(email, password, (err) => {
-      if (err) animateError();
-    });
+    await loginWithPassword({ email, password }, client);
   } catch (error) {
     animateError();
   }
 };
 
-const FormBase = ({ handleSubmit, animateError, animateErrorStatus, noJS }) => (
-  <StyledForm animateError={animateErrorStatus} method="post" onSubmit={handleSubmit(res => login(res, animateError))}>
+const FormBase = ({ handleSubmit, animateError, animateErrorStatus, noJS, client }) => (
+  <StyledForm animateError={animateErrorStatus} method="post" onSubmit={handleSubmit(res => login(res, animateError, client))}>
     <FormLine>
       <Field name="email" placeholder="Identifiant / e-mail" component={LoginText} />
     </FormLine>
@@ -53,7 +52,7 @@ const mapDispatchToProps = dispatch => ({
   }, 1350, { trailing: false }),
 });
 
-const FormBaseWithLogin = connect(mapStateToProps, mapDispatchToProps)(FormBase);
+const FormBaseWithLogin = connect(mapStateToProps, mapDispatchToProps)(withApollo(FormBase));
 
 const Form = reduxForm({
   form: 'login',
