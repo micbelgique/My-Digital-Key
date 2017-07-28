@@ -284,7 +284,7 @@ babel-core@^6.16.0, babel-core@^6.24.1:
     slash "^1.0.0"
     source-map "^0.5.0"
 
-babel-eslint@^7.2.3:
+babel-eslint@^7.0.0, babel-eslint@^7.2.3:
   version "7.2.3"
   resolved "https://registry.yarnpkg.com/babel-eslint/-/babel-eslint-7.2.3.tgz#b2fe2d80126470f5c19442dc757253a897710827"
   dependencies:
@@ -2775,6 +2775,14 @@ merge-descriptors@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/merge-descriptors/-/merge-descriptors-1.0.1.tgz#b00aaa556dd8b44568150ec9d1b953f3f90cbb61"
 
+meteor-apollo-accounts@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/meteor-apollo-accounts/-/meteor-apollo-accounts-2.0.1.tgz#c2b3f4955247cc4693fcf5a1fa09dc4ac93c5010"
+  dependencies:
+    babel-eslint "^7.0.0"
+    uglify-js "^2.7.3"
+    underscore "^1.8.3"
+
 meteor-node-stubs@~0.2.0:
   version "0.2.5"
   resolved "https://registry.yarnpkg.com/meteor-node-stubs/-/meteor-node-stubs-0.2.5.tgz#e7d24aabdc4aab6120f43157d61807b94849e9de"
@@ -3933,6 +3941,15 @@ uglify-js@2.8.x:
   optionalDependencies:
     uglify-to-browserify "~1.0.0"
 
+uglify-js@^2.7.3:
+  version "2.8.29"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-2.8.29.tgz#29c5733148057bb4e1f75df35b7a9cb72e6a59dd"
+  dependencies:
+    source-map "~0.5.1"
+    yargs "~3.10.0"
+  optionalDependencies:
+    uglify-to-browserify "~1.0.0"
+
 uglify-to-browserify@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/uglify-to-browserify/-/uglify-to-browserify-1.0.2.tgz#6e0924d6bda6b5afe349e39a6d632850a0f882b7"
@@ -3941,7 +3958,7 @@ ultron@~1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/ultron/-/ultron-1.1.0.tgz#b07a2e6a541a815fc6a34ccd4533baec307ca864"
 
-underscore@^1.7.0:
+underscore@^1.7.0, underscore@^1.8.3:
   version "1.8.3"
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.8.3.tgz#4f3fb53b106e6097fcf9cb4109f2a5e9bdfa5022"
 

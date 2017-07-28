@@ -16,8 +16,6 @@ email@1.2.1 # Send emails
 http@1.2.12
 ssrwpo:ssr@=3.0.0
 deanius:promise
-accounts-base@1.3.0
-accounts-password@1.3.6
 apollo
 dynamic-import
 vsivsi:file-collection
