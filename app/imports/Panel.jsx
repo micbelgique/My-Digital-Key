@@ -8,6 +8,8 @@ import client from '/imports/ApolloClient';
 import { onTokenChange, userId, logout } from 'meteor-apollo-accounts';
 import Dashboard from '/imports/ui/components/Pages/Dashboard';
 import NFC from '/imports/ui/components/Pages/NFC';
+import Locks from '/imports/ui/components/Pages/Locks';
+import Keys from '/imports/ui/components/Pages/Keys';
 
 class Panel extends Component {
 
@@ -40,6 +42,8 @@ class Panel extends Component {
       <Switch>
         <Route exact path="/" component={Dashboard} />
         <Route exact path="/NFC" component={NFC} />
+        <Route exact path="/locks" component={Locks} />
+        <Route exact path="/keys" component={Keys} />
         <Route
           exact
           path="/disconnect"

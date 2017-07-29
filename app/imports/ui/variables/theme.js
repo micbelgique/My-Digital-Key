@@ -17,12 +17,12 @@ const buttons = {
 };
 
 const header = {
-  bgc: colors.secondary,
+  bg: 'linear-gradient(45deg, rgba(165,162,214,1) 0%, rgba(104,101,165,1) 100%)',
   height: '60px',
   zIndex: 998,
   button: {
     openBgc: colors.primary,
-    hoverBgc: colors.primary,
+    hoverBgc: 'rgba(0,0,0, 0.1)',
     bgi: '/img/logo.png',
     height: '60px',
     width: '60px',
@@ -42,7 +42,7 @@ const modal = {
 
 const menu = {
   zIndex: 998,
-  bgc: colors.secondary,
+  bgc: 'linear-gradient(45deg, rgba(136,134,184,1) 0%, rgba(126,151,188,1) 29%, rgba(212,210,246,1) 100%)',
   width: '250px',
 };
 
