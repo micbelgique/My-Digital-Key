@@ -50,3 +50,22 @@ body{
 	margin: 20px 4%;
 	width: 88%;
 }
+.locks-element-pic{
+	width: 80px;
+	float: left;
+}
+.locks-element-content{
+	font-size: 0.75em;
+	color: #95989A;
+	margin-left : 70px;
+	min-height: 75px;
+}
+.location-button{
+	border: 0;
+	color : #8E8E8E;
+	font-size: 0.7;
+	
+}
+.locks-element-content-img{
+	vertical-align: middle;
+}
