@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <nfc/nfc.h>
+#include <thread>
 static void
 print_hex(const uint8_t *pbtData, const size_t szBytes)
 {
@@ -32,11 +33,18 @@ main(int argc, const char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
+	printf("a");
+
 	uint8_t *t = static_cast<uint8_t*>(malloc(11));
 
+	printf("b");
+
 	while (true) {
+		printf("c");
 		nfc_target_receive_bytes(pnd, t, 11, 300);
 		print_hex(t, 11);
+		std::this_thread::sleep_for(std::chrono::milliseconds(200));
+		printf("d");
 	}
 
 	nfc_close(pnd);
