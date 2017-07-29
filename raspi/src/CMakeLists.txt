@@ -28,4 +28,4 @@ file(
 
 set(EXECUTABLE_OUTPUT_PATH ../bin/${CMAKE_BUILD_TYPE})
 
-target_link_libraries(raspi nfc usb)
+target_link_libraries(raspi nfc usb boost_system pthread)

@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <nfc/nfc.h>
 #include <boost/asio.hpp>
+#include <iostream>
 #include <iomanip>
 
 #define ARRAY_SIZE(a) sizeof(a) / sizeof(*a)
