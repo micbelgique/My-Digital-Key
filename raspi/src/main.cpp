@@ -17,17 +17,17 @@ main(int argc, const char *argv[])
 	nfc_device *pnd;
 	nfc_target nt;
 	nfc_context *context;
-	
+	printf("a");
 	nfc_init(&context);
 	if (context == NULL) {
 		printf("Unable to init libnfc (malloc)\n");
 		exit(EXIT_FAILURE);
-	}
+	}printf("a");
 	const char *acLibnfcVersion = nfc_version();
 	(void)argc;
 	printf("%s uses libnfc %s\n", argv[0], acLibnfcVersion);
 	pnd = nfc_open(context, NULL);
-
+	printf("a");
 	if (pnd == NULL) {
 		printf("ERROR: %s\n", "Unable to open NFC device.");
 		exit(EXIT_FAILURE);
