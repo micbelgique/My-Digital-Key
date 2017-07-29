@@ -28,6 +28,7 @@ settings:
     - meteor/ssrwpo:ssr
     - meteor/mdg:validated-method
     - meteor/didericis:callpromise-mixin
+    - meteor/nicolaslopezj:apollo-accounts
   import/resolver:
     meteor:
       extensions:
