@@ -8,3 +8,14 @@ LED ROUGE: GPIO 16 (CLOSE)
     MOSI: Raspberry Pi GPIO 23  
     SSEL: Raspberry Pi GPIO 18  
     GND: Raspberry Pi GND  
+
+# Install raspi server
+
+sudo apt-get update -qq && sudo apt-get install -y -qq git cmake build-essential g++ gcc make
+mkdir build
+cd build
+cmake ../src
+nmake
+cd ../bin
+#cd Release
+cd Debug
