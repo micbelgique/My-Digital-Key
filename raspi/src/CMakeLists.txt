@@ -17,4 +17,4 @@ file(
 
 set(EXECUTABLE_OUTPUT_PATH ../bin/${CMAKE_BUILD_TYPE})
 
-target_link_libraries(raspi nfc)
+target_link_libraries(raspi nfc usb)
