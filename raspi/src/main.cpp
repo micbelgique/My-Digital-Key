@@ -16,6 +16,7 @@ main(int argc, const char *argv[])
 	nfc_device *pnd;
 	nfc_target nt;
 	nfc_context *context;
+	
 	nfc_init(&context);
 	if (context == NULL) {
 		printf("Unable to init libnfc (malloc)\n");
@@ -34,6 +35,10 @@ main(int argc, const char *argv[])
 		nfc_perror(pnd, "nfc_initiator_init");
 		exit(EXIT_FAILURE);
 	}
+
+	nfc_target *pnc;
+
+	nfc_initiator_poll_dep_target(pnd, NDM_ACTIVE, nfc_baud_rate::NBR_212, NULL, pnc, 300);
 
 	printf("NFC reader: %s opened\n", nfc_device_get_name(pnd));
 
