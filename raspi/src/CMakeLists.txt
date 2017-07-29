@@ -4,6 +4,8 @@ project (raspi)
 set (CMAKE_CXX_STANDARD 11)
 
 add_executable(raspi main.cpp)
+include_directories(../lib/libnfc/include)
+include_directories(../lib/libnfc/libnfc/chips)
 
 file(
   GLOB_RECURSE

@@ -11,7 +11,7 @@ LED ROUGE: GPIO 16 (CLOSE)
 
 # Install raspi server
 
-sudo apt-get update -qq && sudo apt-get install -y -qq git cmake
+sudo apt-get update -qq && sudo apt-get install -y -qq git cmake build-essential g++ gcc make
 mkdir build
 cd build
 cmake ../src
