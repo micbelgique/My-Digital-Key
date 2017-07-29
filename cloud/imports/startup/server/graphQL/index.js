@@ -17,6 +17,7 @@ const schema = makeExecutableSchema({
 });
 
 const checkAuthorization = (lock, userToken) => {
+  console.log(userToken);
   const decodedToken = decodeURIComponent(userToken);
   return decodedToken === '+s4MLjr8eDjcoQvO9/5UuiiywbKa8KG7jSfRIFtxsqw=';
 };
