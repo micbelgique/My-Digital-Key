@@ -1,23 +1,44 @@
-import { createResolver } from 'apollo-resolvers';
-import { createError, isInstance } from 'apollo-errors';
-import { AuthenticationRequiredError } from './errors';
+const typeDefs = [
+  `
+type Email {
+  address: String
+  verified: Boolean
+}
 
-const UnknownError = createError('UnknownError', {
-  message: 'An unknown error has occurred! Please try again later',
-});
+type User {
+  emails: [Email]
+  _id: String
+  name: String
+}
 
-export const baseResolver = createResolver(
-   // incoming requests will pass through this resolver like a no-op
-  null,
-  /*
-    Only mask outgoing errors that aren't already apollo-errors,
-    such as ORM errors etc
-  */
-  (root, args, context, error) => (isInstance(error) ? error : new UnknownError()),
-);
+type DigitalLock {
+  id: String
+  address: String
+  owner: String
+  logs: [LockLog]
+}
 
-export const isAuthenticatedResolver = baseResolver.createResolver(
-  (root, args, { userId }) => {
-    if (!userId) throw new AuthenticationRequiredError();
-  },
-);
+type LockLog {
+  id: String
+  date: String
+  lock: DigitalLock
+}
+
+type Query {
+  user: User
+  digitalLocks: [DigitalLock]
+  digitalLock(id: String!): DigitalLock
+  LockLogs: [LockLog]
+  LockLog(id: String!): LockLog
+}
+`,
+];
+
+export default typeDefs;
+
+// type Mutation {
+//   createClient(input: CreateClientInput!): Client
+//   createInvoice(input: CreateInvoiceInput!): Invoice
+//   createInvoiceItem(input: CreateInvoiceItemInput!): InvoiceItem
+//   updateNotes(input: UpdateNotesInput!): Agency
+// }
