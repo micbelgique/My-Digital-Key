@@ -31,16 +31,13 @@ main(int argc, const char *argv[])
 		printf("ERROR: %s\n", "Unable to open NFC device.");
 		exit(EXIT_FAILURE);
 	}
-	if (nfc_initiator_init(pnd) < 0) {
-		nfc_perror(pnd, "nfc_initiator_init");
-		exit(EXIT_FAILURE);
+
+	uint8_t *t = static_cast<uint8_t*>(malloc(11));
+
+	while (true) {
+		nfc_target_receive_bytes(pnd, t, 11, 300);
+		print_hex(t, 11);
 	}
-
-	nfc_target *pnc;
-
-	nfc_initiator_poll_dep_target(pnd, NDM_ACTIVE, nfc_baud_rate::NBR_212, NULL, pnc, 300);
-
-	printf("lol");
 
 	nfc_close(pnd);
 	nfc_exit(context);
