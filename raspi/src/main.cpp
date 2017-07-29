@@ -40,7 +40,7 @@ main(int argc, const char *argv[])
 
 	nfc_initiator_poll_dep_target(pnd, NDM_ACTIVE, nfc_baud_rate::NBR_212, NULL, pnc, 300);
 
-	printf("NFC reader: %s opened\n", nfc_device_get_name(pnd));
+	printf("lol");
 
 	const nfc_modulation nmMifare = {
 		.nmt = NMT_ISO14443A,
