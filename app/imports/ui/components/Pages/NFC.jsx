@@ -21,14 +21,14 @@ class NFC extends Component {
         // }, () => console.log('success'), () => console.log('failure'));
         //nfc.enabled(() => console.log('success'), () => console.log('error'));
         const message = [
-            ndef.uriRecord("hello world"),
+            ndef.uriRecord("hello"),
         ];
         // message.forEach(e => console.log(Object.keys(e)));
         // nfc.unshare(
         //   () => console.log('un-shared'),
         //   () => console.log('failed to unshare'),
         // );
-        nfc.share(message, () => console.log('success'), (error) => console.error(error));
+        nfc.share(message, () => console.log('success'), (error) => console.error("there is an error" + error));
       });
     }
   }
