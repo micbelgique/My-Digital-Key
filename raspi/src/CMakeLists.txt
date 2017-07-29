@@ -7,6 +7,8 @@ add_executable(raspi main.cpp)
 include_directories(../lib/libnfc/include)
 include_directories(../lib/libnfc/libnfc/chips)
 
+link_directories(/usr/lib/arm-linux-gnueabihf/)
+
 file(
   GLOB_RECURSE
   source_files
@@ -14,3 +16,5 @@ file(
 )
 
 set(EXECUTABLE_OUTPUT_PATH ../bin/${CMAKE_BUILD_TYPE})
+
+target_link_libraries(raspi nfc)
