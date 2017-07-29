@@ -20,7 +20,7 @@ body{
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a5a2d6', endColorstr='#6865a5', GradientType=1 );
 }
 
-.locksTitle{
+.usersTitle{
 	position: fixed;
 	top: 50px;
 	left: 0;
@@ -35,37 +35,31 @@ body{
 	box-shadow: 0 3px 6px rgba(0,0,0, 0.04);
 	border-bottom: 1px solid rgba(149,152,154,0.22);
 }
-.locksTitle-img{
+.usersTitle-img{
 	vertical-align: middle;
 	margin-right: 40px;
 }
 
-.locks{
+.users{
 	margin-top: 150px;
 }
-.locks-element{
-	background: white;
+.users-element{
+	background: rgba(255,255,255,0.22);
+	box-shadow: 0 3px 6px rgba(0,0,0, 0.04);
 	color: black;
-	padding: 2%;
-	margin: 20px 4%;
-	width: 88%;
+	padding: 4%;
+	margin: 0 4%;
+	border-bottom: 1px solid white;
+	width: 84%;
 }
-.locks-element-pic{
+.users-element-pic{
 	width: 80px;
 	float: left;
 }
-.locks-element-content{
-	font-size: 0.75em;
-	color: #95989A;
-	margin-left : 70px;
-	min-height: 75px;
-}
-.location-button{
-	border: 0;
-	color : #8E8E8E;
-	font-size: 0.7;
-	
-}
-.locks-element-content-img{
-	vertical-align: middle;
+.users-element-content{
+	font-size: 1.3em;
+	color: #616161;
+	margin-top: 15px;
+	margin-left : 100px;
+	min-height: 45px;
 }
