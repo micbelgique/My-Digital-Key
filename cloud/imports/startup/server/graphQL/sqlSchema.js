@@ -6,19 +6,20 @@ export const sequelize = new Sequelize('digitalkey', 'root', 'graphql', {
     collate: 'utf8_general_ci',
     timestamps: true,
   },
+  dialect: 'mysql',
 });
 
-export const DigitalKey = sequelize.define('digitalKey', {
+export const DigitalLock = sequelize.define('digitalLock', {
   id: { type: Sequelize.UUID, defaultValue: Sequelize.UUIDV4, primaryKey: true },
   address: { type: Sequelize.STRING },
 });
 
-export const KeyLog = sequelize.define('keyLog', {
+export const LockLog = sequelize.define('LockLog', {
   id: { type: Sequelize.UUID, defaultValue: Sequelize.UUIDV4, primaryKey: true },
   date: { type: Sequelize.DATE, defaultValue: Sequelize.NOW },
 });
 
-DigitalKey.hasMany(KeyLog);
-KeyLog.belongsTo(DigitalKey);
+DigitalLock.hasMany(LockLog);
+LockLog.belongsTo(DigitalLock);
 
 sequelize.sync();

@@ -21,7 +21,7 @@ class NFC extends Component {
         // }, () => console.log('success'), () => console.log('failure'));
         //nfc.enabled(() => console.log('success'), () => console.log('error'));
         const message = [
-            ndef.uriRecord("https://www.mighdy.com"),
+            ndef.uriRecord("hello world"),
         ];
         // message.forEach(e => console.log(Object.keys(e)));
         // nfc.unshare(

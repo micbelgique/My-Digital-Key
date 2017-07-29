@@ -1,0 +1,82 @@
+body{
+	background: #EFF3FE;
+	margin: 0;
+	font-family: 'Roboto';
+}
+.fixedContainer{
+	width:100%;
+}
+.header{
+
+  height:50px;
+  /* background color*/
+  background: rgba(165,162,214,1);
+  background: -moz-linear-gradient(45deg, rgba(165,162,214,1) 0%, rgba(104,101,165,1) 100%);
+  background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(165,162,214,1)), color-stop(100%, rgba(104,101,165,1)));
+  background: -webkit-linear-gradient(45deg, rgba(165,162,214,1) 0%, rgba(104,101,165,1) 100%);
+  background: -o-linear-gradient(45deg, rgba(165,162,214,1) 0%, rgba(104,101,165,1) 100%);
+  background: -ms-linear-gradient(45deg, rgba(165,162,214,1) 0%, rgba(104,101,165,1) 100%);
+  background: linear-gradient(45deg, rgba(165,162,214,1) 0%, rgba(104,101,165,1) 100%);
+  filter: proid:DXImageTransform.Microsoft.gradient( startColorstr='#a5a2d6', endColorstr='#6865a5', GradientType=1 );
+  position: fixed;
+  top: 0;
+  left: 0;
+  width:100%;
+  z-index: 2002;
+}
+.menu{
+	position: fixed;
+	z-index: 2000;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	font-weight: bold;
+	color: white;
+	width: 80%;
+	background: rgba(136,134,184,1);
+	background: -moz-linear-gradient(45deg, rgba(136,134,184,1) 0%, rgba(126,151,188,1) 29%, rgba(212,210,246,1) 100%);
+	background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(136,134,184,1)), color-stop(29%, rgba(126,151,188,1)), color-stop(100%, rgba(212,210,246,1)));
+	background: -webkit-linear-gradient(45deg, rgba(136,134,184,1) 0%, rgba(126,151,188,1) 29%, rgba(212,210,246,1) 100%);
+	background: -o-linear-gradient(45deg, rgba(136,134,184,1) 0%, rgba(126,151,188,1) 29%, rgba(212,210,246,1) 100%);
+	background: -ms-linear-gradient(45deg, rgba(136,134,184,1) 0%, rgba(126,151,188,1) 29%, rgba(212,210,246,1) 100%);
+	background: linear-gradient(45deg, rgba(136,134,184,1) 0%, rgba(126,151,188,1) 29%, rgba(212,210,246,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8886b8', endColorstr='#d4d2f6', GradientType=1 );
+}
+.menu-content{
+	padding-top : 55px;
+
+}
+.menu-element{
+	background: rgba(255,255,255,0.22);
+	box-shadow: 0 3px 6px rgba(0,0,0,0.04);
+	width: 100px;
+	padding: 50px;
+	text-align: center;
+	margin: auto;
+	margin-top: 10px;
+}
+.menu-logout{
+	color: white;
+	text-transform: uppercase;
+	font-weight: bold;
+	padding: 5px 0;
+	width: 100%;
+	position: absolute;
+	text-align: center;
+	bottom: 0;
+	left: 0;
+	margin: 0;
+	border-top: 1px solid white;
+	
+}
+.menu-logout-img{
+	vertical-align: middle;
+	margin-left: 10px;
+}
+
+
+
+
+
+
+
