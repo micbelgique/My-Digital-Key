@@ -95,13 +95,13 @@ const Tag = styled.span`
   position: relative;
 `;
 
-const PersonElement = ({ img, username, access, toggleAccess }) => (
+const PersonElement = ({ img, username, access, toggleAccess, owner }) => (
   <ElementDiv access={access}>
     <Container>
       <ImgContainer><PersonImg src={`/img/${username}.jpg`} /></ImgContainer>
       <Tags>
         <Tag>{username}</Tag>
-        <Tag onClick={toggleAccess} style={{ 
+        {!owner ? <Tag onClick={toggleAccess} style={{ 
           float: 'right',
           borderRadius: '100%',
           background: 'rgba(0,0,0, 0.8)',
@@ -110,7 +110,7 @@ const PersonElement = ({ img, username, access, toggleAccess }) => (
           textAlign: 'center',
           color: 'white',
           lineHeight: '22px',
-        }}>{access ? 'X' : '+'}</Tag>
+        }}>{access ? 'X' : '+'}</Tag> : <Tag style={{ marginTop: '10px' }}>Propriétaire</Tag>}
       </Tags>
     </Container>
   </ElementDiv>
@@ -183,10 +183,18 @@ const Lock = ({ match, data: { loading, error, users }, giveAccess, removeAccess
         overflow: 'auto',
         lineHeight: '71px',
       }}><Img src="/img/porte1.jpg" />{address}</H1>
+      {loading || error ? <div>Chargement...</div> : users.map((person, index) => (
+        index !== 0 ? null : <PersonElement
+          owner
+          {...person}
+          toggleAccess={() => null}
+          access={person.locks !== null && findIndex(person.locks, lock => lock === match.params.id) !== -1}
+        />
+      ))}
       <H2>Personnes ayant accès</H2>
-      <OnlyMe onClick={() => users.forEach(person => toggleAccess(match.params.id, person._id, giveAccess, removeAccess, true))}>Only me</OnlyMe>
-      {loading || error ? <div>Chargement...</div> : users.map(person => (
-        <PersonElement
+      <OnlyMe onClick={() => users.forEach(person => person._id === "SZTALLRQm9KmSRX7C" ? null : toggleAccess(match.params.id, person._id, giveAccess, removeAccess, true))}>Only me</OnlyMe>
+      {loading || error ? <div>Chargement...</div> : users.map((person, index) => (
+        index === 0 ? null : <PersonElement
           {...person}
           toggleAccess={() => toggleAccess(match.params.id, person._id, giveAccess, removeAccess, (person.locks !== null && findIndex(person.locks, lock => lock === match.params.id) !== -1))}
           access={person.locks !== null && findIndex(person.locks, lock => lock === match.params.id) !== -1}
@@ -199,7 +207,9 @@ const Lock = ({ match, data: { loading, error, users }, giveAccess, removeAccess
 Lock.propTypes = {};
 
 export default compose(
-  graphql(usersQuery),
+  graphql(usersQuery, {
+    options: { pollInterval: 500 },
+  }),
   graphql(giveAccessQuery, {
     name: 'giveAccess',
   }),
