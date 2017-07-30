@@ -1,3 +1,18 @@
+# Auteurs
+
+Equipe Litt Up
+
+- Corentin 
+- Bainjamin  
+- Jérémy 
+- Aurélien 
+
+# Description
+
+nom du projet
+description avec techno utilisée
+
+
 # Liste GPIO
 
 LED VERT: GPIO 12 (OPEN)  
