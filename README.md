@@ -1,3 +1,14 @@
+# My Digital key !
+
+My digital key vous permet de déverrouiller votre porte à l'aide de la technologie NFC de votre smartphone. Prêtez la clé de votre maison à votre famille ou à vos amis à l'aide de l'application où vous leur donnerez l’accès à votre serrure connectée ! Gardez le contrôle total sur votre serrure grâce à l'historique des ouvertures de porte ou encore grâce au paramétrage des différents accès à votre porte (heures d'accès, nombre d'ouvertures autorisées, …).
+
+Equipe Litt Up
+
+- Corentin Bilotta
+- Bainjamin Lafalize 
+- Jérémy Moffa
+- Aurélien Staquet
+
 # Liste GPIO
 
 LED VERT: GPIO 12 (OPEN)  

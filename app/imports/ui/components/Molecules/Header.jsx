@@ -3,11 +3,23 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { base, scroll } from '/imports/api/redux/actions';
+import { Link } from 'react-router-dom';
+import Svg from '/imports/ui/components/Atoms/Svg';
+
+const line = `
+  display: block;
+  width: 100%;
+  height: .2em;
+  margin: 0 0 .2em;
+  transition: transform .2s ease-in-out;
+  border-radius: .05em;
+  background: #FFF;
+`;
 
 const HeaderWrapper = styled.header`
   height: ${props => props.theme.header.height};
   top: 0;
-  background-color: ${props => props.theme.header.bgc};
+  background: ${props => props.theme.header.bg};
   position: fixed;
   width: 100%;
   z-index: ${props => props.theme.header.zIndex};
@@ -15,26 +27,68 @@ const HeaderWrapper = styled.header`
   box-shadow: 0 1px 3px -1px rgba(0,0,0,.40);
 `;
 
+const StyledSvgHome = styled(Svg)`
+  position: relative;
+  display: inline-block;
+  height: 60px;
+  width: 60px;
+  padding: 10px;
+  fill: #FFF;
+  vertical-align: sub;
+`;
+
+const HomeButton = styled(props => (
+  <Link to="/" {...props}>
+    <StyledSvgHome icon="home" />
+  </Link>
+))`
+  position: absolute;
+  top: 0;
+  right: 5px;
+  height: 60px;
+  width: 60px;
+`;
+
+const MenuLine = styled.span`
+  ${line}
+`;
+
 const Button = styled.button`
+  position: absolute;
   height: ${props => props.theme.header.button.height};
   width: ${props => props.theme.header.button.width};
-  background: ${props => `url(${props.theme.header.button.bgi}) no-repeat center`};
+  background: transparent;
   background-size: contain;
   border: none;
   outline: none;
   transition: 0.5s;
-  box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.45);
-  ${props => (!props.isActive ? '' : `
-      background-color: ${props.theme.header.button.openBgc};
-      box-shadow: inset -1px 0 10px 1px rgba(0, 0, 0, 0.15);`)}
-  &:hover {
-    background-color: ${props => props.theme.header.button.hoverBgc};
+  font-size: 30px;
+  padding: 0;
+  border: 0 none;
+  outline: 0;
+  background-color: transparent;
+  transition: transform .2s ease-in-out;
+  height: auto;
+  width: 40px;
+  margin-right: 1em;
+  z-index: 1;
+  top: 15px;
+  left: 15px;
+  &:after {
+    ${line}
+    content: " ";
+    margin: 0;
+  }
+  &:before {
+    ${line}
+    content: " ";
   }
 `;
 
 const Header = ({ isMenuOpen, toggleMenu }) => (
   <HeaderWrapper className="header">
-    <Button isActive={isMenuOpen} onClick={toggleMenu} />
+    <Button isActive={isMenuOpen} onClick={toggleMenu}><MenuLine /></Button>
+    <HomeButton />
   </HeaderWrapper>
 );
 

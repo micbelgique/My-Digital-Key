@@ -6,18 +6,52 @@ import CategoryEl from '/imports/ui/components/Atoms/MenuCategoryEl';
 import PropTypes from 'prop-types';
 
 const OptionSvg = styled(Svg)`
+${props => !props.disconnect ? `
   position: relative;
-  display: inline-block;
-  width: 1.2em;
-  height: 1.2em;
-  fill: #707070;
-  vertical-align: sub;
+  display: inline - block;
+  width: 90px;
+  height: 90px;
+  margin: 15px 0;
+  fill: #FFF;
+  vertical - align: sub;`
+  : `
+    position: relative;
+    display: inline - block;
+    width: 25px;
+    height: 25px;
+    margin: 0 15px;
+    fill: #FFF;
+    vertical - align: sub;
+`}
 `;
 
-const Option = ({ name, href, active, icon }) => (
+const LinkText = styled.span`
+${props => props.disconnect ? `
+    position: absolute;
+    bottom: 0;
+    height: auto;
+    line-height: 1.5em;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+  ` : `
+    display: block;
+    position: relative;
+    width: 100%;
+    line-height: 1.25em;
+    padding-bottom: 5px;
+    text-decoration: none;
+    outline: none;
+    color: #FFF;
+  `}
+`;
+
+const Option = ({ name, href, active, icon, disconnect }) => (
   <CategoryEl>
-    <OptionSvg icon={icon} />
-    <StyledLink option active={active} to={href}>{name}</StyledLink>
+    <StyledLink disconnect={disconnect} option active={active} to={href}>
+      <OptionSvg icon={icon} disconnect={disconnect} />
+      <LinkText>{name}</LinkText>
+    </StyledLink>
   </CategoryEl>
 );
 

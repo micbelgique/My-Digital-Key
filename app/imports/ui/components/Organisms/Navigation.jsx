@@ -6,15 +6,12 @@ import Header from '/imports/ui/components/Molecules/Header';
 const categories = [
   { name: 'Applications',
     links: [
-      { name: 'Dashboard', href: '/' },
-      { name: 'NFC', href: '/NFC' },
+      { name: 'Serrures', href: '/locks', icon: 'keyhole' },
+      { name: 'Clés', href: '/keys', icon: 'key' },
     ],
   },
   { name: 'Options',
     links: [
-      { name: 'Mon compte', href: '/account', icon: 'account' },
-      { name: 'Assistance', href: '/support', icon: 'assistance' },
-      { name: 'Paramètres', href: '/settings', icon: 'settings' },
       { name: 'Déconnexion', href: '/disconnect', icon: 'disconnect' },
     ],
   },

@@ -2,59 +2,35 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-const StyledLink = styled(({ active, option, ...rest }) => <Link {...rest} />)`
-  font-weight: 400;
-  color: #494949;
+const StyledLink = styled(({ active, option, disconnect, ...rest }) => <Link {...rest} />)`
+${props => !props.disconnect ? `
+  position: relative;
+  display: block;
+  background: rgba(255,255,255,0.22);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.04);
+  width: 80%;
+  padding: 0;
+  text-align: center;
+  margin: 10px auto 0 auto;
+  height: auto;
+  line-height: 1.25em;
   text-decoration: none;
-  font-size: 1.2em;
-  &:before {
-    margin-right: -0.6em;
-    transition: 0.35s;
-    width: 0.6em;
-    transform: scale(0);
-    border-radius: 100%;
-    height: 0.6em;
-    top: -0.05em;
-    content: " ";
-    display: inline-block;
-    position: relative;
-  }
-  ${props => (!props.active ?
-    `
-    &:hover {
-      color: #D6D6D6;
-    }
-    &:hover:before {
-      background: rgba(147,147,147,0.4);
-      box-shadow: 0px 1px 2px 1px rgba(147,147,147,0.5);
-      margin-right: 8px;
-      transform: scale(1);
-    }
-    ` : '')
-  }
-  ${props => (props.active ?
-    `
-    &:before{
-        background: rgb(99,99,99);
-        box-shadow: 0px 1px 2px 1px rgba(99,99,99,0.5);
-        margin-right: 8px;
-        transform: scale(1);
-    }
-    ` : '')
-  }
-  ${props => (props.option ?
-    `
-    &:before {
-      content: none;
-    }
-    margin-left: 8px;
-    ` : '')
-  }
-  ${props => ((props.option && props.active) ?
-    `
-    color: #D6D6D6;
-    ` : '')
-  }
-`;
+  outline: none;
+  color: #FFF;
+` : `
+  position: relative;
+  display: block;
+  background: rgba(255,255,255,0.22);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.04);
+  width: 100%;
+  padding: 5px 0 0 0;
+  text-align: center;
+  margin: 10px 0 0 0;
+  height: auto;
+  line-height: 1.25em;
+  text-decoration: none;
+  outline: none;
+  color: #FFF;
+`}`;
 
 export default StyledLink;

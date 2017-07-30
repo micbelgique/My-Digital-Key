@@ -6,7 +6,7 @@ const CategoryEl = styled.li`
   margin: 0;
   padding: 0;
   list-style: none;
-  padding: 5px 0px;
+  padding: 0;
 `;
 
 export default CategoryEl;
