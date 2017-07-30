@@ -3,6 +3,17 @@ project (raspi)
 
 set (CMAKE_CXX_STANDARD 11)
 
+include(FindBoost)
+find_package(
+    Boost
+    1.54.0
+    REQUIRED
+)
+
+include_directories(${Boost_INCLUDE_DIRS})
+link_directories(${Boost_LIBRARY_DIRS})
+
+
 add_executable(raspi main.cpp)
 include_directories(../lib/libnfc/include)
 include_directories(../lib/libnfc/libnfc/chips)
@@ -17,4 +28,4 @@ file(
 
 set(EXECUTABLE_OUTPUT_PATH ../bin/${CMAKE_BUILD_TYPE})
 
-target_link_libraries(raspi nfc usb)
+target_link_libraries(raspi nfc usb boost_system pthread)
