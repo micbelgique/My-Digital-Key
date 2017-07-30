@@ -42,16 +42,39 @@ const TimeStamp = styled.div`
   float: right;
 `;
 
+const DummyData = [
+  {
+    img: '/img/porte1.jpg',
+    name: 'Robert Perreault',
+    address: 'Maison',
+    timestamp: 'Il y a 2 minutes',
+  },
+  {
+    img: '/img/porte2.jpg',
+    name: 'Robert Perreault',
+    address: 'Châlet',
+    timestamp: 'Il y a 2 minutes',
+  },
+  {
+    img: '/img/porte3.jpg',
+    name: 'Robert Perreault',
+    address: 'Garage',
+    timestamp: 'Il y a 2 minutes',
+  },
+];
+
 const Dashboard = () => (
   <Main>
     <Wrapper>
       <H1>Dashboard</H1>
       <H2>Historique des utilisateurs</H2>
       <HistoryContainer>
-        <HistoryEntry>
-          <Img src="/img/logo.png" />
-          <TextContainer><b>Robert Perreault</b> a déverrouillé la porte à Rue Bois des Fosses 104 9931 Oostwinkel<br /><TimeStamp>Il y a 2 minutes</TimeStamp></TextContainer>
-        </HistoryEntry>
+        {DummyData.map((data, index) => (
+          <HistoryEntry key={index}>
+            <Img src={data.img} />
+            <TextContainer><b>{data.name}</b> a déverrouillé la porte à {data.address}<br /><TimeStamp>{data.timestamp}</TimeStamp></TextContainer>
+          </HistoryEntry>
+        ))}
       </HistoryContainer>
     </Wrapper>
   </Main>

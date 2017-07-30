@@ -22,6 +22,7 @@ type LockLog {
   id: String
   date: String
   lock: DigitalLock
+  person: User
 }
 
 type Query {
