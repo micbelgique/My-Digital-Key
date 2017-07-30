@@ -17,6 +17,8 @@ const ElementDiv = styled.div`
   height: 150px;
   border-bottom: 1px solid white;
   width: 100%;
+  transition: .5s;
+  ${props => !props.access && 'filter: grayscale(0.5); opacity: 0.5;'}
 `;
 
 const Container = styled.div`
@@ -67,8 +69,8 @@ const Tag = styled.span`
   position: relative;
 `;
 
-const PersonElement = ({ img, name }) => (
-  <ElementDiv>
+const PersonElement = ({ img, name, access }) => (
+  <ElementDiv access={access}>
     <Container>
       <ImgContainer><PersonImg src={img} /></ImgContainer>
       <Tags>
@@ -82,7 +84,7 @@ const PersonElement = ({ img, name }) => (
           textAlign: 'center',
           color: 'white',
           lineHeight: '22px',
-        }}>X</Tag>
+        }}>{access ? 'X' : '+'}</Tag>
       </Tags>
     </Container>
   </ElementDiv>
@@ -101,9 +103,9 @@ const Img = styled.div`
 `;
 
 const Persons = [
-  { name: 'Corentin', img: '/img/porte1.jpg' },
-  { name: 'Aurélien', img: '/img/porte2.jpg' },
-  { name: 'Thomas', img: '/img/porte3.jpg' },
+  { name: 'Jean', img: '/img/Jean.jpg', access: true },
+  { name: 'Thomas', img: '/img/Thomas.jpg', access: false },
+  { name: 'Olivier', img: '/img/Olivier.jpg', access: true },
 ];
 
 const Lock = (props) => (
