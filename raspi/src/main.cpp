@@ -4,13 +4,11 @@
 #include <iostream>
 #include <iomanip>
 
-#define ARRAY_SIZE(a) sizeof(a) / sizeof(*a)
-
 std::string getArrayToHexString(uint8_t* array, size_t size){
     std::ostringstream os;
     os << std::hex << std::uppercase << std::setfill('0');
     for(std::size_t i{0}; i < size; ++i){
-        os << std::setw(2) << array[i];
+        os << std::setw(2) << *(array+i);
     }
     return os.str();
 }
@@ -18,10 +16,10 @@ std::string getArrayToHexString(uint8_t* array, size_t size){
 int main(int argc, const char *argv[])
 {
 
-    if(argc < 2){
-        std::cout << "Please use like this : ./raspi <serveraddr>" << std::endl;
-        return -1;
-    }
+    	if(argc < 2){
+        	std::cout << "Please use like this : ./raspi <serveraddr>" << std::endl;
+        	return -1;
+ 	}
 
 	nfc_device *pnd;
 	nfc_target nt;
@@ -58,15 +56,19 @@ int main(int argc, const char *argv[])
 	};
 
 	if (nfc_initiator_select_passive_target(pnd, nmMifare, NULL, 0, &nt) > 0) {
-        nt.nti.nai.abtUid;
-        boost::asio::io_service svc;
-        boost::asio::ip::tcp::socket sock{svc};
-        boost::asio::ip::tcp::endpoint ep{boost::asio::ip::address::from_string(argv[1]), 3000};
+        	nt.nti.nai.abtUid;
+        	boost::asio::io_service svc;
+        	boost::asio::ip::tcp::socket sock{svc};
+        	boost::asio::ip::tcp::endpoint ep{boost::asio::ip::address::from_string(argv[1]), 3002};
         //sock.connect(ep);
-        //sock.send(boost::asio::buffer{std::string{"GET /access?lock=1&userToken="} + getArrayToHexString(nt.nti.nai.abtUid, nt.nti.nai.szUidLen)});
-        std::cout << std::string{"GET /access?lock=1&userToken="} + getArrayToHexString(nt.nti.nai.abtUid, nt.nti.nai.szUidLen);
+		std::ostringstream os;
+		os << "GET /access?lock=1&userToken=";
+		os << getArrayToHexString(nt.nti.nai.abtUid, nt.nti.nai.szUidLen);
+		std::string req{os.str()};
+        	sock.send(boost::asio::buffer(req));
+		sock.close();
+		nfc_close(pnd);
+		nfc_exit(context);
+		exit(EXIT_SUCCESS);
 	}
-	nfc_close(pnd);
-	nfc_exit(context);
-	exit(EXIT_SUCCESS);
 }
