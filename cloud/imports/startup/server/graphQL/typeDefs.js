@@ -9,6 +9,7 @@ type User {
   emails: [Email]
   _id: String
   username: String
+  locks: [String]
 }
 
 type DigitalLock {
@@ -17,6 +18,7 @@ type DigitalLock {
   owner: String
   logs: [LockLog]
   img: String
+  name: String
 }
 
 type LockLog {
@@ -27,7 +29,7 @@ type LockLog {
 }
 
 type Query {
-  user: User
+  user(id: String): User
   users: [User]
   digitalLocks: [DigitalLock]
   digitalLock(id: String!): DigitalLock
@@ -36,7 +38,9 @@ type Query {
 }
 
 type Mutation {
-  addDigitalLock: DigitalLock
+  addDigitalLock(id: String!, name: String!, img: String!, address: String!, owner: String!): DigitalLock
+  giveDigitalLockAccess(lockId: String!, userId: String!): String
+  removeDigitalLockAccess(lockId: String!, userId: String!): String
 }
 
 `,

@@ -21,9 +21,9 @@ import Head from './Head';
 export const apolloReducer = client.reducer();
 export const apolloMiddleware = client.middleware();
 
-// Clé bleue : 58 1A 50 39
-// Carte blanche: 54 FC 6A FF
-// Tel bainjamin: 01 02 03 04
+// Carte blanche: 54 FC 6A FF 00 28 FD F2 17 FF -> Jean
+// Clé bleue : 58 1A 50 39 -> Thomas
+// Tel bainjamin: 01 02 03 04 -> Olivier
 
 const Base = ({ logged, lightbox, lightboxClose, lightboxPrev, lightboxNext }, { store }) => (
   <ApolloProvider store={store} client={client}>

@@ -5,19 +5,27 @@ import Wrapper from '/imports/ui/components/Atoms/Wrapper';
 import ElementBlock from '/imports/ui/components/Atoms/ElementBlock';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import gql from 'graphql-tag';
+import { graphql, withApollo, compose } from 'react-apollo';
 
-const list = [
-  { singleLink: '/lock/1', img: '/img/porte1.jpg', name: 'Maison', keyNumber: 3, address: 'Rue Bois des fosses 104, 9932 Oostiskn' },
-  { singleLink: '/lock/2', img: '/img/porte2.jpg', name: 'Châlet', keyNumber: 5, address: 'Rue Bois des fosses 104, 9932 Oostiskn' },
-  { singleLink: '/lock/3', img: '/img/porte3.jpg', name: 'Garage', keyNumber: 2, address: 'Rue Bois des fosses 104, 9932 Oostiskn' },
-];
+const LocksQuery = gql`
+query digitalLocks {
+  digitalLocks {
+    id
+    name
+    address
+    owner
+    img
+  } 
+}
+`;
 
-const Locks = () => (
+const Locks = ({ data: { loading, error, digitalLocks } }) => (
   <Main>
     <Wrapper>
       <H1>Serrures</H1>
-      {list.map(e => (
-        <Link to={e.singleLink}><ElementBlock {...e} /></Link>
+      {loading || error ? null : digitalLocks.map(e => (
+        <Link to={`/lock/${e.id}`}><ElementBlock {...e} keyNumber={1} /></Link>
       ))}
     </Wrapper>
   </Main>
@@ -25,4 +33,4 @@ const Locks = () => (
 
 Locks.propTypes = {};
 
-export default Locks;
+export default graphql(LocksQuery)(Locks);

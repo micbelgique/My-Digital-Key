@@ -7,6 +7,8 @@ import {
 } from './queries';
 import {
   AddDigitalLockResolver,
+  GiveLockAccessResolver,
+  RemoveLockAccessResolver,
 } from './mutations';
 
 const resolvers = {
@@ -22,6 +24,8 @@ const resolvers = {
   },
   Mutation: {
     addDigitalLock: AddDigitalLockResolver,
+    giveDigitalLockAccess: GiveLockAccessResolver,
+    removeDigitalLockAccess: RemoveLockAccessResolver,
   },
 };
 

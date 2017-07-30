@@ -10,8 +10,11 @@ export const sequelize = new Sequelize('digitalkey', 'root', 'graphql', {
 });
 
 export const DigitalLock = sequelize.define('digitalLock', {
-  id: { type: Sequelize.UUID, defaultValue: Sequelize.UUIDV4, primaryKey: true },
+  id: { type: Sequelize.STRING, primaryKey: true },
   address: { type: Sequelize.STRING },
+  img: { type: Sequelize.STRING },
+  owner: { type: Sequelize.STRING },
+  name: { type: Sequelize.STRING },
 });
 
 export const LockLog = sequelize.define('LockLog', {
@@ -22,4 +25,4 @@ export const LockLog = sequelize.define('LockLog', {
 DigitalLock.hasMany(LockLog);
 LockLog.belongsTo(DigitalLock);
 
-sequelize.sync();
+sequelize.sync({});

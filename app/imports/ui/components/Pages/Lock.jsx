@@ -3,7 +3,9 @@ import Main from '/imports/ui/components/Atoms/Main';
 import { H1, H2 } from '/imports/ui/components/Atoms/Headings';
 import Wrapper from '/imports/ui/components/Atoms/Wrapper';
 import PropTypes from 'prop-types';
-import pick from 'lodash/pick';
+import findIndex from 'lodash/findIndex';
+import differenceBy from 'lodash/differenceBy';
+import union from 'lodash/union';
 import styled from 'styled-components';
 import gql from 'graphql-tag';
 import { graphql, withApollo, compose } from 'react-apollo';
@@ -11,8 +13,22 @@ import { graphql, withApollo, compose } from 'react-apollo';
 const usersQuery = gql`
   query usersQuery {
     users {
+      _id
       username
+      locks
     }
+  }
+`;
+
+const giveAccessQuery = gql`
+  mutation giveAccessQuery($lockId: String!, $userId: String!) {
+    giveDigitalLockAccess(lockId: $lockId, userId: $userId)
+  }  
+`;
+
+const removeAccessQuery = gql`
+  mutation removeAccessQuery($lockId: String!, $userId: String!) {
+    removeDigitalLockAccess(lockId: $lockId, userId: $userId)
   }
 `;
 
@@ -79,13 +95,13 @@ const Tag = styled.span`
   position: relative;
 `;
 
-const PersonElement = ({ img, username, access }) => (
+const PersonElement = ({ img, username, access, toggleAccess }) => (
   <ElementDiv access={access}>
     <Container>
       <ImgContainer><PersonImg src={`/img/${username}.jpg`} /></ImgContainer>
       <Tags>
         <Tag>{username}</Tag>
-        <Tag style={{ 
+        <Tag onClick={toggleAccess} style={{ 
           float: 'right',
           borderRadius: '100%',
           background: 'rgba(0,0,0, 0.8)',
@@ -112,7 +128,54 @@ const Img = styled.div`
   float: left;
 `;
 
-const Lock = ({ data: { loading, error, users } }) => (
+const toggleAccess = (lockId, userId, giveAccessFunc, removeAccessFunc, hasAccess) => {
+  const remove = () => removeAccessFunc({
+    variables: { userId, lockId },
+    update: (store) => {
+      try {
+        // Try to get data from store and if there is, patch it.
+        const data = store.readQuery({ query: usersQuery });
+        const userIndex = findIndex(data.users, (user => user._id === userId));
+        data.users[userIndex] = {
+          ...data.users[userIndex],
+          locks: differenceBy(data.users[userIndex].locks, [lockId]),
+        };
+        store.writeQuery({ query: usersQuery, data });
+      } catch (e) {console.error(e)}
+    },
+  });
+  const give = () => giveAccessFunc({
+    variables: { userId, lockId },
+    update: (store) => {
+      try {
+        // Try to get data from store and if there is, patch it.
+        const data = store.readQuery({ query: usersQuery });
+        const userIndex = findIndex(data.users, (user => user._id === userId));
+        data.users[userIndex] = {
+          ...data.users[userIndex],
+          locks: union(data.users[userIndex].locks, [lockId]),
+        };
+        store.writeQuery({ query: usersQuery, data });
+      } catch (e) { console.error(e) }
+    },
+  });
+  if (hasAccess) return remove();
+  return give();
+};
+
+const OnlyMe = styled.button`
+  display: block;
+  position: relative;
+  width: 100%;
+  line-height: 3.5em;
+  background: black;
+  color: #FFF;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 15px;
+`;
+
+const Lock = ({ match, data: { loading, error, users }, giveAccess, removeAccess }) => (
   <Main>
     <Wrapper>
       <H1 style={{
@@ -121,8 +184,13 @@ const Lock = ({ data: { loading, error, users } }) => (
         lineHeight: '71px',
       }}><Img src="/img/porte1.jpg" />{address}</H1>
       <H2>Personnes ayant accès</H2>
+      <OnlyMe onClick={() => users.forEach(person => toggleAccess(match.params.id, person._id, giveAccess, removeAccess, true))}>Only me</OnlyMe>
       {loading || error ? <div>Chargement...</div> : users.map(person => (
-        <PersonElement {...person} access={true} />
+        <PersonElement
+          {...person}
+          toggleAccess={() => toggleAccess(match.params.id, person._id, giveAccess, removeAccess, (person.locks !== null && findIndex(person.locks, lock => lock === match.params.id) !== -1))}
+          access={person.locks !== null && findIndex(person.locks, lock => lock === match.params.id) !== -1}
+        />
       ))}
     </Wrapper>
   </Main>
@@ -130,4 +198,12 @@ const Lock = ({ data: { loading, error, users } }) => (
 
 Lock.propTypes = {};
 
-export default graphql(usersQuery)(Lock);
+export default compose(
+  graphql(usersQuery),
+  graphql(giveAccessQuery, {
+    name: 'giveAccess',
+  }),
+  graphql(removeAccessQuery, {
+    name: 'removeAccess',
+  }),
+)(Lock);
