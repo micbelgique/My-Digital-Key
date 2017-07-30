@@ -1,16 +1,56 @@
 #include <stdlib.h>
 #include <nfc/nfc.h>
-#include <boost/asio.hpp>
+#include <boost/process.hpp>
+#include <sstream>
 #include <iostream>
 #include <iomanip>
 
-std::string getArrayToHexString(uint8_t* array, size_t size){
+namespace bp = ::boost::process; 
+
+std::string getArrayToHexString(uint8_t *array){
     std::ostringstream os;
-    os << std::hex << std::uppercase << std::setfill('0');
-    for(std::size_t i{0}; i < size; ++i){
-        os << std::setw(2) << *(array+i);
+    os << std::hex << std::setfill('0');
+    for(std::size_t i{0}; i < 4; ++i){
+  //     	std::cout << "n:" << array[i] << ":" << std::endl;
+	os << std::setw(2) << static_cast<unsigned>(array[i]);
+
     }
     return os.str();
+}
+
+std::vector<std::string> read_outline(std::string const& file)
+{
+    bp::ipstream is; //reading pipe-stream
+    bp::child c("/usr/bin/curl", file, bp::std_out > is, bp::std_err > bp::null);
+
+    std::vector<std::string> data;
+    std::string line;
+
+    while (c.running() && std::getline(is, line) && !line.empty())
+        data.push_back(line);
+
+    c.wait();
+
+    return data;
+}
+
+
+void writeGPIO(int gpio, int val){
+//	std::ostringstream os;
+//	os << "sudo echo \"" << gpio << "\" > /sys/class/gpio/export";
+//	std::cout << os.str() << std::endl;	
+//	std::system(os.str().c_str());
+
+//	std::ostringstream os2;
+//	os2 << "sudo echo \"out\" > /sys/class/gpio/gpio" << gpio <<"/direction";
+//	std::cout << os2.str() << std::endl;
+//	std::system(os2.str().c_str());
+
+	std::ostringstream os3;
+        os3 << "sudo echo \"" << val << "\" > /sys/class/gpio/gpio" << gpio << "/value";
+        std::cout << os3.str() << std::endl;
+        std::system(os3.str().c_str());
+
 }
 
 int main(int argc, const char *argv[])
@@ -55,20 +95,45 @@ int main(int argc, const char *argv[])
 		.nbr = NBR_106,
 	};
 
-	if (nfc_initiator_select_passive_target(pnd, nmMifare, NULL, 0, &nt) > 0) {
-        	nt.nti.nai.abtUid;
-        	boost::asio::io_service svc;
-        	boost::asio::ip::tcp::socket sock{svc};
-        	boost::asio::ip::tcp::endpoint ep{boost::asio::ip::address::from_string(argv[1]), 3002};
-        //sock.connect(ep);
-		std::ostringstream os;
-		os << "GET /access?lock=1&userToken=";
-		os << getArrayToHexString(nt.nti.nai.abtUid, nt.nti.nai.szUidLen);
-		std::string req{os.str()};
-        	sock.send(boost::asio::buffer(req));
-		sock.close();
-		nfc_close(pnd);
-		nfc_exit(context);
-		exit(EXIT_SUCCESS);
+	writeGPIO(12, 0);
+	writeGPIO(16, 0);
+
+	while(true){
+	
+		if (nfc_initiator_select_passive_target(pnd, nmMifare, NULL, 0, &nt) > 0) {
+
+
+                	std::ostringstream os;
+        	        os << "http://" << argv[1] << ":3002/access?lock=1&userToken=";
+	                os << getArrayToHexString(nt.nti.nai.abtUid);
+
+			//std::cout << "lol" << os.str() << std::endl;
+
+
+                	auto res = read_outline(os.str());
+
+			if(res[0] == "GRANTED"){
+				writeGPIO(12, 1);
+				writeGPIO(16, 0);
+				std::this_thread::sleep_for(std::chrono::seconds(2));
+				writeGPIO(12, 0);
+			}else{
+				writeGPIO(12, 0);
+				writeGPIO(16, 1);
+				std::this_thread::sleep_for(std::chrono::milliseconds(200));
+				writeGPIO(16, 0);
+				std::this_thread::sleep_for(std::chrono::milliseconds(200));
+				writeGPIO(16, 1);
+				std::this_thread::sleep_for(std::chrono::seconds(1));
+				writeGPIO(16, 0);
+			}
+
+        	}		
+
 	}
+	
+	nfc_close(pnd);
+        nfc_exit(context);
+        exit(EXIT_SUCCESS);
+
 }
