@@ -5,6 +5,16 @@ import Wrapper from '/imports/ui/components/Atoms/Wrapper';
 import PropTypes from 'prop-types';
 import pick from 'lodash/pick';
 import styled from 'styled-components';
+import gql from 'graphql-tag';
+import { graphql, withApollo, compose } from 'react-apollo';
+
+const usersQuery = gql`
+  query usersQuery {
+    users {
+      username
+    }
+  }
+`;
 
 const address = 'Maison';
 
@@ -69,12 +79,12 @@ const Tag = styled.span`
   position: relative;
 `;
 
-const PersonElement = ({ img, name, access }) => (
+const PersonElement = ({ img, username, access }) => (
   <ElementDiv access={access}>
     <Container>
-      <ImgContainer><PersonImg src={img} /></ImgContainer>
+      <ImgContainer><PersonImg src={`/img/${username}.jpg`} /></ImgContainer>
       <Tags>
-        <Tag>{name}</Tag>
+        <Tag>{username}</Tag>
         <Tag style={{ 
           float: 'right',
           borderRadius: '100%',
@@ -102,13 +112,7 @@ const Img = styled.div`
   float: left;
 `;
 
-const Persons = [
-  { name: 'Jean', img: '/img/Jean.jpg', access: true },
-  { name: 'Thomas', img: '/img/Thomas.jpg', access: false },
-  { name: 'Olivier', img: '/img/Olivier.jpg', access: true },
-];
-
-const Lock = (props) => (
+const Lock = ({ data: { loading, error, users } }) => (
   <Main>
     <Wrapper>
       <H1 style={{
@@ -117,8 +121,8 @@ const Lock = (props) => (
         lineHeight: '71px',
       }}><Img src="/img/porte1.jpg" />{address}</H1>
       <H2>Personnes ayant accès</H2>
-      {Persons.map(person => (
-        <PersonElement {...person} />
+      {loading || error ? <div>Chargement...</div> : users.map(person => (
+        <PersonElement {...person} access={true} />
       ))}
     </Wrapper>
   </Main>
@@ -126,4 +130,4 @@ const Lock = (props) => (
 
 Lock.propTypes = {};
 
-export default Lock;
+export default graphql(usersQuery)(Lock);

@@ -3,20 +3,26 @@ import {
   DigitalLockResolver,
   LockLogsResolver,
   LockLogResolver,
+  UsersResolver,
 } from './queries';
-import {} from './mutations';
+import {
+  AddDigitalLockResolver,
+} from './mutations';
 
 const resolvers = {
   Query: {
     user(root, args, context) {
       return context.user;
     },
+    users: UsersResolver,
     digitalLocks: DigitalLocksResolver,
     digitalLock: DigitalLockResolver,
     LockLogs: LockLogsResolver,
     LockLog: LockLogResolver,
   },
-  // Mutation: {},
+  Mutation: {
+    addDigitalLock: AddDigitalLockResolver,
+  },
 };
 
 export default resolvers;
