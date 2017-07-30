@@ -1,3 +1,18 @@
+# Auteurs
+
+Equipe Litt Up
+
+- Corentin Bilotta
+- Bainjamin Lafalize 
+- Jérémy Moffa
+- Aurélien Staquet
+
+# Description
+
+nom du projet
+description avec techno utilisée
+
+
 # Liste GPIO
 
 LED VERT: GPIO 12 (OPEN)  
