@@ -34,3 +34,11 @@ cd Debug
 # Visuals
 
 ![alt text](http://bainjamizr.cluster017.ovh.net/IMGS_GITHUB/01.png)
+![alt text](http://bainjamizr.cluster017.ovh.net/IMGS_GITHUB/02.png)
+![alt text](http://bainjamizr.cluster017.ovh.net/IMGS_GITHUB/03.png)
+![alt text](http://bainjamizr.cluster017.ovh.net/IMGS_GITHUB/04.png)
+![alt text](http://bainjamizr.cluster017.ovh.net/IMGS_GITHUB/05.png)
+![alt text](http://bainjamizr.cluster017.ovh.net/IMGS_GITHUB/06.png)
+![alt text](http://bainjamizr.cluster017.ovh.net/IMGS_GITHUB/07.png)
+![alt text](http://bainjamizr.cluster017.ovh.net/IMGS_GITHUB/08.png)
+![alt text](http://bainjamizr.cluster017.ovh.net/IMGS_GITHUB/09.png)
