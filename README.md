@@ -30,3 +30,7 @@ nmake
 cd ../bin
 #cd Release
 cd Debug
+
+# Visuals
+
+![alt text](http://bainjamizr.cluster017.ovh.net/IMGS_GITHUB/01.png)
