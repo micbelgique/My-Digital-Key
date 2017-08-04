@@ -9,7 +9,7 @@ Equipe Litt Up
 - Jérémy Moffa
 - Aurélien Staquet
 
-# Liste GPIO
+# Liste GPIO (Dans le cadre d'un prototypage avec usage d'un raspberry pi 3)
 
 LED VERT: GPIO 12 (OPEN)  
 LED ROUGE: GPIO 16 (CLOSE)  
