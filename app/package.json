@@ -15,7 +15,7 @@
     "apollo-server-express": "^1.0.4",
     "babel-plugin-styled-components": "^1.1.4",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.5",
-    "bcrypt": "^0.8.7",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.17.1",
     "cors": "^2.8.4",
     "electrode-react-ssr-caching": "0.1.5",
